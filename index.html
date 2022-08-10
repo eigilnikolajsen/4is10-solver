@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple solver for finding the solutions to the 4=10 puzzle. It can show the solution and solve the puzzle for your 4=10 game app." />
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
+    <title>4=10 solver</title>
+    <script src="index.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.0.1/math.min.js" integrity="sha512-B82WLflI1EQiR9sGbIV1ddGVvK4ghj1xjMShL7YvcOrHjX2qP72lHztT1DxBVPiz1aTR6mOUJbtwj06uadL2GA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <main id="container">
+        <h1 id="name">4=10 solver – all solutions</h1>
+        <div id="wrapper">
+            <h2 id="title">5+5+5-5=10</h2>
+            <div id="number_outer">
+                <div class="overlay" id="overlay_top"></div>
+                <div id="number_wrapper"></div>
+                <div class="overlay" id="overlay_bottom"></div>
+            </div>
+            <button type="submit" id="button">solve</button>
+        </div>
+        <p id="credits">Made by Eigil Nikolajsen. Code on GitHub.</p>
+    </main>
+</body>
+
+</html>

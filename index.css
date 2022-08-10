@@ -1,0 +1,129 @@
+:root {
+    --dark: rgba(2, 9, 25, 1);
+    --dark0: rgba(2, 9, 25, 0);
+    --light: rgba(203, 205, 208, 1);
+    --light0: rgba(203, 205, 208, 0);
+}
+
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--light);
+    font-family: 'Cousine', monospace;
+    font-weight: 400;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    background-color: var(--dark);
+}
+
+#title {
+    font-size: 2rem;
+    margin: 2rem;
+}
+
+button {
+    background-color: var(--light);
+    color: var(--dark);
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem 0.4rem 1rem;
+    margin: 2rem;
+    cursor: pointer;
+    transition: transform .8s cubic-bezier(.2, .8, .2, 1);
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.97);
+    transition: transform .2s cubic-bezier(.2, .8, .2, 1);
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#number_outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#number_wrapper {
+    display: flex;
+    height: calc(3rem + 2px);
+    cursor: grab;
+}
+
+#number_wrapper:active {
+    cursor: grabbing;
+}
+
+.number_container {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    transition: transform 0.2s cubic-bezier(.2, .8, .2, 1);
+    padding: 0 .5rem;
+}
+
+.number {
+    width: 3rem;
+    height: 0;
+    padding: 12% 0 88% 0;
+    margin: 0 -1px -2px -1px;
+    text-align: center;
+    border: 2px solid var(--light);
+}
+
+.overlay {
+    width: 100%;
+    height: 3rem;
+    position: relative;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#overlay_top {
+    background: linear-gradient(0deg, var(--dark0) 0%, var(--dark) 50%);
+    transform: translateY(-1px);
+}
+
+#overlay_bottom {
+    background: linear-gradient(0deg, var(--dark) 50%, var(--dark0) 100%);
+    transform: translateY(1px);
+}
+
+#name {
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+#credits {
+    font-size: .66rem;
+    margin: 1rem;
+}
