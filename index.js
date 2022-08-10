@@ -122,8 +122,8 @@ let initNumbers = () => {
         for (let j = 0; j < 10; j++) {
             let number = document.createElement("p")
             number.classList.add("number")
-            number.dataset.number = j
-            number.textContent = j
+            number.dataset.number = (j - 1) % 10
+            number.textContent = (j + 99) % 10
             numberContainer.append(number)
         }
         document.querySelector("#number_wrapper").append(numberContainer)
@@ -202,5 +202,19 @@ btn.addEventListener("click", () => {
     title.textContent = " "
     setTimeout(() => {
         title.textContent = solve(numberInput.join(""))
-    }, 1)
+    }, 100)
 })
+
+const appHeight = () => {
+    const doc = document.querySelector("body")
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+}
+
+window.addEventListener("resize", () => {
+    appHeight()
+    setTimeout(() => {
+        appHeight()
+    }, 500)
+})
+
+appHeight()
