@@ -7,47 +7,14 @@ let loopFrame
 let numberInput = [5, 5, 5, 5]
 let curTrans
 
-let moving = () => {
-
-    let transPos = +curTrans + mousePosY - startMouseY
-    let height = document.querySelectorAll(".number")[0].clientHeight + 2
-
-
-    //console.log(transPos)
-
-    grappingEl.style.transform = `translateY(${transPos}px)`
-
-
-    let grapNums = grappingEl.querySelectorAll(".number")
-    for (let i = 0; i < grapNums.length; i++) {
-        let num = grapNums[i]
-        let numOther = num.dataset.number - 5
-        let rotations = Math.floor((numOther * height + transPos) / (height * -10))
-        let numPos = (rotations * height * 10)
-        num.style.transform = `translateY(${numPos}px)`
-    }
-
-
-    if (grapping) {
-        requestAnimationFrame(moving)
-    } else {
-        cancelAnimationFrame(loopFrame)
-        grappingEl.style.transform = `translateY(${Math.round(transPos / height) * height}px)`
-
-        let result = Math.round(-transPos / height + 1000) % 10
-        numberInput[grappingEl.dataset.index] = result
-
-        console.log(numberInput)
-    }
-}
-
+// solve for given combination
 let solve = (num) => {
 
     let nums = num.toString().split("")
     let comb = combinations(nums)
     let oprs = ["+", "-", "*", "/"]
 
-    outerLoop: for (let x = 0; x < comb.length; x++) {
+    for (let x = 0; x < comb.length; x++) {
 
         let ans = ""
 
@@ -109,11 +76,7 @@ let solve = (num) => {
 
                         let mathAns = math.evaluate(ans)
                         let print = `${ans}=${mathAns}`
-                        if (mathAns == 10) {
-                            //console.log(`%c${print}`, "font-size:48px; font-family:monospace")
-                            return print
-                                //break outerLoop
-                        }
+                        if (mathAns == 10) return print
 
                         ans = ""
                     }
@@ -130,6 +93,7 @@ let solve = (num) => {
 
 }
 
+// utility function for shuffling array into all possible combinations
 function combinations(arr) {
     var output = [];
     var n = arr.length;
@@ -148,6 +112,7 @@ function combinations(arr) {
     return output;
 }
 
+// build numbers into HTML
 let initNumbers = () => {
     for (let i = 0; i < 4; i++) {
         let numberContainer = document.createElement("div")
@@ -164,9 +129,40 @@ let initNumbers = () => {
         document.querySelector("#number_wrapper").append(numberContainer)
     }
 }
-
 initNumbers()
 
+// run this loop when moving carrousel
+let moving = () => {
+
+    let transPos = +curTrans + mousePosY - startMouseY
+    let height = document.querySelectorAll(".number")[0].clientHeight + 2
+
+    grappingEl.style.transform = `translateY(${transPos}px)`
+
+    let grapNums = grappingEl.querySelectorAll(".number")
+    for (let i = 0; i < grapNums.length; i++) {
+        let num = grapNums[i]
+        let numOther = num.dataset.number - 5
+        let rotations = Math.floor((numOther * height + transPos) / (height * -10))
+        let numPos = (rotations * height * 10)
+        num.style.transform = `translateY(${numPos}px)`
+    }
+
+    if (grapping) {
+        requestAnimationFrame(moving)
+    } else {
+        cancelAnimationFrame(loopFrame)
+        grappingEl.style.transform = `translateY(${Math.round(transPos / height) * height}px)`
+
+        let result = Math.round(-transPos / height + 1000) % 10
+        numberInput[grappingEl.dataset.index] = result
+
+        console.log(numberInput)
+    }
+
+}
+
+// when user touches numbers
 let startOfTouch = (el, event, touch) => {
     grapping = true
     grappingEl = el
@@ -178,6 +174,7 @@ let startOfTouch = (el, event, touch) => {
     loopFrame = requestAnimationFrame(moving)
 }
 
+// when user stops touching numbers
 let endOfTouch = () => {
     console.log("release")
     document.documentElement.style.cursor = "auto"
@@ -191,12 +188,7 @@ numContainer.forEach((el) => {
     el.addEventListener("touchstart", (event) => startOfTouch(el, event, true))
 })
 
-let handleMousemove = (event) => {
-    mousePosY = event.y || event.touches[0].screenY
-
-    //console.log(`mouse position: ${event.x}:${event.y}`);
-    //console.log(event.touches[0].clientY);
-};
+let handleMousemove = (event) => mousePosY = event.y || event.touches[0].screenY
 
 document.addEventListener("mousemove", handleMousemove);
 document.addEventListener("touchmove", handleMousemove);
@@ -204,6 +196,7 @@ document.addEventListener("touchmove", handleMousemove);
 document.addEventListener("mouseup", endOfTouch)
 document.addEventListener("touchend", endOfTouch)
 
+// solve on button click
 btn.addEventListener("click", () => {
     let title = document.querySelector("#title")
     title.textContent = " "
