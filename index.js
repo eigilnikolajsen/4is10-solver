@@ -191,7 +191,7 @@ let operationsClick = (el) => {
 let moving = () => {
 
     let transPos = +curTrans + mousePosY - startMouseY
-    let height = document.querySelectorAll(".number")[0].clientHeight + 2
+    let height = document.querySelectorAll(".number")[0].clientHeight + 0
 
     grappingEl.style.transform = `translateY(${transPos}px)`
 
@@ -207,6 +207,7 @@ let moving = () => {
     if (grapping) {
         requestAnimationFrame(moving)
     } else {
+        console.log(height)
         cancelAnimationFrame(loopFrame)
         grappingEl.style.transform = `translateY(${Math.round(transPos / height) * height}px)`
 
