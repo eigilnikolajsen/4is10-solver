@@ -184,7 +184,7 @@ let operationsClick = (el) => {
         }
     }
 
-    setTimeout(showSolution, 1)
+    showSolution()
 }
 
 // run this loop when moving carrousel
@@ -213,9 +213,9 @@ let moving = () => {
         let result = Math.round(-transPos / height + 1000) % 10
         numberInput[grappingEl.dataset.index] = result
 
-        console.log(numberInput)
+        //console.log(numberInput)
 
-        setTimeout(showSolution, 400)
+        setTimeout(showSolution, 300)
     }
 
 }
@@ -226,7 +226,7 @@ let showSolution = () => {
     title.textContent = " "
     setTimeout(() => {
         title.textContent = solve(numberInput.join(""))
-    }, 100)
+    }, 500)
 }
 
 // when user touches numbers
@@ -235,7 +235,7 @@ let startOfTouch = (el, event, touch) => {
     grappingEl = el
     if (touch) mousePosY = event.touches[0].screenY
     startMouseY = mousePosY
-    console.log(startMouseY)
+        //console.log(startMouseY)
     curTrans = el.style.transform.split("(")[1].split("px")[0]
     document.documentElement.style.cursor = "grabbing"
     loopFrame = requestAnimationFrame(moving)
@@ -243,7 +243,7 @@ let startOfTouch = (el, event, touch) => {
 
 // when user stops touching numbers
 let endOfTouch = () => {
-    console.log("release")
+    //console.log("release")
     document.documentElement.style.cursor = "auto"
     grapping = false
 }
