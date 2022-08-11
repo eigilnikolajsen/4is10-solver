@@ -75,7 +75,8 @@ let solve = (num) => {
                         }
 
                         let mathAns = math.evaluate(ans)
-                        let print = `${ans}=${mathAns}`
+                        let printAns = ans.replace("-", "–").replace("*", "×").replace("/", "÷")
+                        let print = `${printAns}=${mathAns}`
                         if (mathAns == 10) return print
 
                         ans = ""

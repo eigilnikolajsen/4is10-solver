@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -24,17 +24,22 @@
 
 <body>
     <main id="container">
-        <h1 id="name">4=10 solver – all solutions</h1>
+        <div>
+            <p id="credits">Made by <a href="https://www.behance.net/skriftstudio" target="_blank">Eigil Nikolajsen</a>. Code on <a href="https://github.com/eigilnikolajsen/4is10-solver" target="_blank">GitHub</a>.</p>
+            <h1 id="name">4=10 solver – all solutions</h1>
+        </div>
+        <h2 id="title">5+5+5-5=10</h2>
         <div id="wrapper">
-            <h2 id="title">5+5+5-5=10</h2>
             <div id="number_outer">
                 <div class="overlay" id="overlay_top"></div>
                 <div id="number_wrapper"></div>
                 <div class="overlay" id="overlay_bottom"></div>
+                <div id="operation_wrapper">
+                    <span>(</span><span>+</span><span>–</span><span>×</span><span>÷</span><span>)</span>
+                </div>
             </div>
             <button type="submit" id="button">solve</button>
         </div>
-        <p id="credits">Made by <a href="https://www.behance.net/skriftstudio" target="_blank">Eigil Nikolajsen</a>. Code on <a href="https://github.com/eigilnikolajsen/4is10-solver" target="_blank">GitHub</a>.</p>
     </main>
 </body>
 
