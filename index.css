@@ -29,8 +29,9 @@ body {
 #title {
     width: 100%;
     text-align: center;
-    margin-bottom: -3rem;
+    margin-bottom: -8rem;
     font-size: 2.5rem;
+    color: white;
 }
 
 button {
@@ -129,7 +130,7 @@ button:active {
 }
 
 #operation_wrapper {
-    margin: -2.5rem 0 2.5rem 0;
+    margin: -2.5rem 0 5rem 0;
 }
 
 #operation_wrapper span {
@@ -144,10 +145,12 @@ button:active {
     text-align: center;
     font-size: 1rem;
     margin: 1rem;
+    opacity: 0.9;
 }
 
 #credits {
     text-align: center;
     font-size: .5rem;
     margin: 1rem;
+    opacity: 0.6;
 }
