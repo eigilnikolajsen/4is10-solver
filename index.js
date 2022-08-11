@@ -5,6 +5,8 @@ let grapping = false
 let grappingEl
 let loopFrame
 let numberInput = [5, 5, 5, 5]
+let oprs = ["+", "-", "*", "/"]
+let parens = true
 let curTrans
 
 // solve for given combination
@@ -12,7 +14,7 @@ let solve = (num) => {
 
     let nums = num.toString().split("")
     let comb = combinations(nums)
-    let oprs = ["+", "-", "*", "/"]
+    console.log(oprs)
 
     for (let x = 0; x < comb.length; x++) {
 
@@ -44,38 +46,43 @@ let solve = (num) => {
                             ans = split.join("")
                         }
 
-                        if (m == 1) {
-                            s.splice(3, 0, ")")
-                            s.splice(0, 0, "(")
-                            ans = s.join("")
-                        }
+                        if (parens) {
+                            if (m == 1) {
+                                s.splice(3, 0, ")")
+                                s.splice(0, 0, "(")
+                                ans = s.join("")
+                            }
 
-                        if (m == 2) {
-                            s.splice(5, 0, ")")
-                            s.splice(0, 0, "(")
-                            ans = s.join("")
-                        }
+                            if (m == 2) {
+                                s.splice(5, 0, ")")
+                                s.splice(0, 0, "(")
+                                ans = s.join("")
+                            }
 
-                        if (m == 3) {
-                            s.splice(5, 0, ")")
-                            s.splice(2, 0, "(")
-                            ans = s.join("")
-                        }
+                            if (m == 3) {
+                                s.splice(5, 0, ")")
+                                s.splice(2, 0, "(")
+                                ans = s.join("")
+                            }
 
-                        if (m == 4) {
-                            s.splice(7, 0, ")")
-                            s.splice(2, 0, "(")
-                            ans = s.join("")
-                        }
+                            if (m == 4) {
+                                s.splice(7, 0, ")")
+                                s.splice(2, 0, "(")
+                                ans = s.join("")
+                            }
 
-                        if (m == 5) {
-                            s.splice(7, 0, ")")
-                            s.splice(4, 0, "(")
-                            ans = s.join("")
+                            if (m == 5) {
+                                s.splice(7, 0, ")")
+                                s.splice(4, 0, "(")
+                                ans = s.join("")
+                            }
                         }
 
                         let mathAns = math.evaluate(ans)
-                        let printAns = ans.replace("-", "–").replace("*", "×").replace("/", "÷")
+                        let regS = /[-]/gm
+                        let regM = /[*]/gm
+                        let regD = /[/]/gm
+                        let printAns = ans.replace(regS, "–").replace(regM, "×").replace(regD, "÷")
                         let print = `${printAns}=${mathAns}`
                         if (mathAns == 10) return print
 
@@ -90,7 +97,7 @@ let solve = (num) => {
 
     }
 
-    return "unable to solve"
+    return "no solution"
 
 }
 
@@ -131,6 +138,40 @@ let initNumbers = () => {
     }
 }
 initNumbers()
+
+let operations = document.querySelectorAll("#operation_wrapper span")
+operations.forEach((el) => {
+    el.addEventListener("click", () => operationsClick(el))
+})
+
+let operationsClick = (el) => {
+    let val = el.dataset.content
+    if (val != "(") {
+        if (el.dataset.on) {
+            el.dataset.on = ""
+            el.style.opacity = 1
+            oprs.push(val)
+        } else {
+            el.dataset.on = "1"
+            el.style.opacity = 0.3
+            oprs = oprs.join("").replace(val, "").split("")
+        }
+    } else {
+        for (let i = 0; i < operations.length; i++) {
+            if (operations[i].dataset.content == "(") {
+                if (operations[i].dataset.on) {
+                    operations[i].dataset.on = ""
+                    operations[i].style.opacity = 1
+                    parens = true
+                } else {
+                    operations[i].dataset.on = "1"
+                    operations[i].style.opacity = 0.3
+                    parens = false
+                }
+            }
+        }
+    }
+}
 
 // run this loop when moving carrousel
 let moving = () => {

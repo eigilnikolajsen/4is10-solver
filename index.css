@@ -127,7 +127,7 @@ button:active {
 }
 
 #operation_wrapper {
-    margin: -3.5rem 0 1.5rem 0;
+    margin: -2.5rem 0 2.5rem 0;
 }
 
 #operation_wrapper span {
@@ -135,6 +135,7 @@ button:active {
     font-size: 2rem;
     padding: 0 .5rem;
     margin: 0;
+    transition: opacity 0.3s cubic-bezier(.2, .8, .2, 1);
 }
 
 #name {
