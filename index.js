@@ -6,6 +6,7 @@ let grappingEl
 let loopFrame
 let numberInput = [5, 5, 5, 5]
 let oprs = ["+", "-", "*", "/"]
+let opro = ["/", "*", "-", "+"]
 let parens = true
 let curTrans
 
@@ -14,7 +15,18 @@ let solve = (num) => {
 
     let nums = num.toString().split("")
     let comb = combinations(nums)
-    console.log(oprs)
+
+
+    // get oprs back in order
+    for (let j = 0; j < opro.length; j++) {
+        for (let i = 0; i < oprs.length; i++) {
+            if (oprs[i] == opro[j]) {
+                oprs.splice(i, 1)
+                oprs.unshift(opro[j])
+            }
+        }
+    }
+
 
     for (let x = 0; x < comb.length; x++) {
 
@@ -171,6 +183,8 @@ let operationsClick = (el) => {
             }
         }
     }
+
+    setTimeout(showSolution, 1)
 }
 
 // run this loop when moving carrousel
@@ -200,8 +214,19 @@ let moving = () => {
         numberInput[grappingEl.dataset.index] = result
 
         console.log(numberInput)
+
+        setTimeout(showSolution, 400)
     }
 
+}
+
+// display solution
+let showSolution = () => {
+    let title = document.querySelector("#title")
+    title.textContent = " "
+    setTimeout(() => {
+        title.textContent = solve(numberInput.join(""))
+    }, 100)
 }
 
 // when user touches numbers
@@ -223,40 +248,30 @@ let endOfTouch = () => {
     grapping = false
 }
 
+// eventlisteners
 let numContainer = document.querySelectorAll(".number_container")
-
 numContainer.forEach((el) => {
     el.addEventListener("mousedown", (event) => startOfTouch(el, event, false))
     el.addEventListener("touchstart", (event) => startOfTouch(el, event, true))
 })
-
 let handleMousemove = (event) => mousePosY = event.y || event.touches[0].screenY
-
 document.addEventListener("mousemove", handleMousemove);
 document.addEventListener("touchmove", handleMousemove);
-
 document.addEventListener("mouseup", endOfTouch)
 document.addEventListener("touchend", endOfTouch)
 
 // solve on button click
-btn.addEventListener("click", () => {
-    let title = document.querySelector("#title")
-    title.textContent = " "
-    setTimeout(() => {
-        title.textContent = solve(numberInput.join(""))
-    }, 100)
-})
+btn.addEventListener("click", showSolution)
 
+// update css variable on resize
 const appHeight = () => {
     const doc = document.querySelector("body")
     doc.style.setProperty('--app-height', `${window.innerHeight}px`)
 }
-
 window.addEventListener("resize", () => {
     appHeight()
     setTimeout(() => {
         appHeight()
     }, 500)
 })
-
 appHeight()
