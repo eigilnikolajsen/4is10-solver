@@ -15,6 +15,9 @@ let solve = (num) => {
 
     let nums = num.toString().split("")
     let comb = combinations(nums)
+    let bestGuessMath = 9999
+    let bestGuessAns = "5+5+5-5"
+    let printBest
 
 
     // get oprs back in order
@@ -97,6 +100,11 @@ let solve = (num) => {
                         let printAns = ans.replace(regS, "–").replace(regM, "×").replace(regD, "÷")
                         let print = `${printAns}=${mathAns}`
                         if (mathAns == 10) return print
+                        if (Math.abs(mathAns - 10) < Math.abs(bestGuessMath - 10)) {
+                            bestGuessMath = mathAns
+                            bestGuessAns = printAns
+                        }
+                        printBest = `${bestGuessAns}=${Math.round(bestGuessMath * 100) / 100}`
 
                         ans = ""
                     }
@@ -109,7 +117,7 @@ let solve = (num) => {
 
     }
 
-    return "no solution"
+    return `no solution<br><span>closest solution</span><br><span>${printBest}</span>`
 
 }
 
@@ -207,7 +215,6 @@ let moving = () => {
     if (grapping) {
         requestAnimationFrame(moving)
     } else {
-        console.log(height)
         cancelAnimationFrame(loopFrame)
         grappingEl.style.transform = `translateY(${Math.round(transPos / height) * height}px)`
 
@@ -224,9 +231,9 @@ let moving = () => {
 // display solution
 let showSolution = () => {
     let title = document.querySelector("#title")
-    title.textContent = " "
+    title.innerHTML = " "
     setTimeout(() => {
-        title.textContent = solve(numberInput.join(""))
+        title.innerHTML = solve(numberInput.join(""))
     }, 500)
 }
 

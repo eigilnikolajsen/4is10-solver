@@ -32,6 +32,14 @@ body {
     margin-bottom: -8rem;
     font-size: 2.5rem;
     color: white;
+    line-height: 0;
+}
+
+#title span {
+    font-size: 1rem;
+    color: var(--light);
+    display: block;
+    margin: 3rem 0 -1.5rem 0;
 }
 
 button {
@@ -136,9 +144,10 @@ button:active {
 #operation_wrapper span {
     display: inline-block;
     font-size: 2rem;
-    padding: 0 .5rem;
+    padding: 0 .4rem;
     margin: 0;
     transition: opacity 0.3s cubic-bezier(.2, .8, .2, 1);
+    cursor: pointer;
 }
 
 #name {
